@@ -28,6 +28,9 @@ for x in range(19, 29):
 
 mydata = tempdata
 
+# this is the same dataset but without any dummy-encoding
+tempdata = tempdata.fillna(0)
+
 
 mis_val = mydata.isnull().sum()
 mydata = mydata.fillna(0)
@@ -37,9 +40,21 @@ mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
 
 # practicing data visualization techniques...
 
-# iterating through these two columns
-for i in mydata.index:
-    print(mydata["V_0.0"][i], mydata["V_1.0"][i])
+# FOR DUMMY ENCODED VARIABLES
+# prints out the number of jugs for each V0
 
+print("Number of jugs for each V0:")
+for i in mydata.index:
+    #print(mydata["V_0.0"][i], mydata["V_1.0"][i])
+    if (mydata["V_0.0"][i] == 1):
+        print(mydata["Jugs"][i])
+        
+print()
+print("Same thing but using different code:")
+
+# FOR NON-DUMMY ENCODED VARS
+for i in tempdata.index:
+    if(tempdata["Given Grade"][i] == 0):
+        print(tempdata["Jugs"][i])
 
 
