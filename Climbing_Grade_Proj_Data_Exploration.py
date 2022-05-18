@@ -3,6 +3,7 @@
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn import linear_model
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_selection import RFE
@@ -30,10 +31,15 @@ mydata = tempdata
 
 mis_val = mydata.isnull().sum()
 mydata = mydata.fillna(0)
-#mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
+mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
 
-# this is a test to see if github is working properly
 
+
+# practicing data visualization techniques...
+
+# iterating through these two columns
+for i in mydata.index:
+    print(mydata["V_0.0"][i], mydata["V_1.0"][i])
 
 
 
