@@ -21,6 +21,7 @@ tempdata = mydata
 
 
 # dropping empty rows at the bottom   This works by checking each index in the original dataset, then removing that specific row from the new dataset regardless of index
+# first argument is row to start on, second is one over the row to end on
 for x in range(19, 29):
     tempdata = tempdata.drop([mydata.index[x]])
     
@@ -61,7 +62,7 @@ for i in tempdata.index:
 # need to make a distribution chart for grades and number of jugs
 
 # distribution including entire dataset
-sns.displot(tempdata, x="Jugs")
+#sns.displot(tempdata, x="Jugs")
 
 # creating a dataset with only V0s
 V0data = tempdata
