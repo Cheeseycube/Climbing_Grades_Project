@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_selection import RFE
 import seaborn as sns
 
-mydata = pd.read_excel("Climbing_Stats.xlsx")
+mydata = pd.read_excel("Climbing_Stats_ProjectVersion.xlsx")
 
 
 mydata = mydata.drop('Observations', 1) # Dropping the observations column. 1 for cols, 0 for rows
@@ -22,7 +22,7 @@ tempdata = mydata
 
 # dropping empty rows at the bottom   This works by checking each index in the original dataset, then removing that specific row from the new dataset regardless of index
 # first argument is row to start on, second is one over the row to end on
-for x in range(19, 29):
+for x in range(21, 29):
     tempdata = tempdata.drop([mydata.index[x]])
     
 #tempdata = tempdata.drop([mydata.index[17], mydata.index[18]])
@@ -59,7 +59,7 @@ for i in tempdata.index:
         print(tempdata["Jugs"][i])
         
 
-# need to make a distribution chart for grades and number of jugs
+# JUG DISTRIBUTION CHARTS
 
 # distribution including entire dataset
 #sns.displot(tempdata, x="Jugs")
@@ -102,3 +102,90 @@ for i in tempdata.index:
 # distribution of jugs for V3s only        
 sns.displot(V3data, x="Jugs")
 
+
+
+# idea: look at num footholds / total length or num handholds / total length
+
+# research maximum liklihood estimation
+
+# NUMBER OF FOOTHOLDS DISTRIBUTION CHART
+
+# creating a dataset with only V0s
+V0data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 0):
+        V0data = V0data.drop([tempdata.index[i]])
+
+# distribution of Number of footholds for V0s only        
+sns.displot(V0data, x="Number of footholds")
+
+
+# creating a dataset with only V1s
+V1data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 1):
+        V1data = V1data.drop([tempdata.index[i]])
+
+# distribution of Number of footholds for V1s only        
+sns.displot(V1data, x="Number of footholds")
+
+
+# creating a dataset with only V2s
+V2data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 2):
+        V2data = V2data.drop([tempdata.index[i]])
+
+# distribution of Number of footholds for V2s only        
+sns.displot(V2data, x="Number of footholds")
+
+# creating a dataset with only V3s
+V3data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 3):
+        V3data = V3data.drop([tempdata.index[i]])
+
+# distribution of Number of footholds for V3s only        
+sns.displot(V3data, x="Number of footholds")
+
+
+
+#  TOTAL CRIMPS DISTRIBUTION CHART
+
+# creating a dataset with only V0s
+V0data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 0):
+        V0data = V0data.drop([tempdata.index[i]])
+
+# distribution of Total Crimps for V0s only        
+sns.displot(V0data, x="Total Crimps")
+
+
+# creating a dataset with only V1s
+V1data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 1):
+        V1data = V1data.drop([tempdata.index[i]])
+
+# distribution of Total Crimps for V1s only        
+sns.displot(V1data, x="Total Crimps")
+
+
+# creating a dataset with only V2s
+V2data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 2):
+        V2data = V2data.drop([tempdata.index[i]])
+
+# distribution of Total Crimps for V2s only        
+sns.displot(V2data, x="Total Crimps")
+
+# creating a dataset with only V3s
+V3data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 3):
+        V3data = V3data.drop([tempdata.index[i]])
+
+# distribution of Total Crimps for V3s only        
+sns.displot(V3data, x="Total Crimps")
