@@ -42,7 +42,7 @@ mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
 
 trainingSet = tempdata
 
-X = trainingSet[["Number of footholds", "Jugs"]]           # added on V grades for testing
+X = trainingSet[["Number of footholds", "Jugs"]]           
 
 #Y = trainingSet['V_2.0']
 
@@ -64,4 +64,8 @@ regr.fit(X,Y)
 
 predictedGradeV0 = regr.predict([testrow1])
 predictedGradeV3 = regr.predict([testrow2])
+
+# https://analyticsindiamag.com/maximum-likelihood-estimation-python-guide/
+
+
 
