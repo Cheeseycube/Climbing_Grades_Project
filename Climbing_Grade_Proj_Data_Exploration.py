@@ -59,6 +59,9 @@ for i in tempdata.index:
         print(tempdata["Jugs"][i])
         
 
+
+
+
 # JUG DISTRIBUTION CHARTS
 
 # distribution including entire dataset
@@ -71,7 +74,7 @@ for i in tempdata.index:
         V0data = V0data.drop([tempdata.index[i]])
 
 # distribution of jugs for V0s only        
-sns.displot(V0data, x="Jugs")
+sns.displot(V0data, x="Jugs").set(title = 'Jug Distribution for V0')
 
 
 # creating a dataset with only V1s
@@ -81,7 +84,7 @@ for i in tempdata.index:
         V1data = V1data.drop([tempdata.index[i]])
 
 # distribution of jugs for V1s only        
-sns.displot(V1data, x="Jugs")
+sns.displot(V1data, x="Jugs").set(title = 'Jug Distribution for V1')
 
 
 # creating a dataset with only V2s
@@ -91,7 +94,7 @@ for i in tempdata.index:
         V2data = V2data.drop([tempdata.index[i]])
 
 # distribution of jugs for V2s only        
-sns.displot(V2data, x="Jugs")
+sns.displot(V2data, x="Jugs").set(title = 'Jug Distribution for V2')
 
 # creating a dataset with only V3s
 V3data = tempdata
@@ -100,7 +103,7 @@ for i in tempdata.index:
         V3data = V3data.drop([tempdata.index[i]])
 
 # distribution of jugs for V3s only        
-sns.displot(V3data, x="Jugs")
+sns.displot(V3data, x="Jugs").set(title = 'Jug Distribution for V3')
 
 
 
@@ -117,7 +120,7 @@ for i in tempdata.index:
         V0data = V0data.drop([tempdata.index[i]])
 
 # distribution of Number of footholds for V0s only        
-sns.displot(V0data, x="Number of footholds")
+sns.displot(V0data, x="Number of footholds").set(title = 'Foothold distribution for V0')
 
 
 # creating a dataset with only V1s
@@ -127,7 +130,7 @@ for i in tempdata.index:
         V1data = V1data.drop([tempdata.index[i]])
 
 # distribution of Number of footholds for V1s only        
-sns.displot(V1data, x="Number of footholds")
+sns.displot(V1data, x="Number of footholds").set(title = 'Foothold distribution for V1')
 
 
 # creating a dataset with only V2s
@@ -137,7 +140,7 @@ for i in tempdata.index:
         V2data = V2data.drop([tempdata.index[i]])
 
 # distribution of Number of footholds for V2s only        
-sns.displot(V2data, x="Number of footholds")
+sns.displot(V2data, x="Number of footholds").set(title = 'Foothold distribution for V2')
 
 # creating a dataset with only V3s
 V3data = tempdata
@@ -146,7 +149,7 @@ for i in tempdata.index:
         V3data = V3data.drop([tempdata.index[i]])
 
 # distribution of Number of footholds for V3s only        
-sns.displot(V3data, x="Number of footholds")
+sns.displot(V3data, x="Number of footholds").set(title = 'Foothold distribution for V3')
 
 
 
@@ -189,3 +192,46 @@ for i in tempdata.index:
 
 # distribution of Total Crimps for V3s only        
 sns.displot(V3data, x="Total Crimps")
+
+
+
+
+# DIFFICULT CRIMPS DISTRIBUTION CHARTS
+
+# creating a dataset with only V0s
+V0data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 0):
+        V0data = V0data.drop([tempdata.index[i]])
+
+# distribution of difficult Crimps for V0s only        
+sns.displot(V0data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V0")
+
+
+# creating a dataset with only V1s
+V1data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 1):
+        V1data = V1data.drop([tempdata.index[i]])
+
+# distribution of difficult Crimps for V1s only        
+sns.displot(V1data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V1")
+
+
+# creating a dataset with only V2s
+V2data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 2):
+        V2data = V2data.drop([tempdata.index[i]])
+
+# distribution of difficult Crimps for V2s only        
+sns.displot(V2data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V2")
+
+# creating a dataset with only V3s
+V3data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 3):
+        V3data = V3data.drop([tempdata.index[i]])
+
+# distribution of difficult Crimps for V3s only        
+sns.displot(V3data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V3")
