@@ -137,17 +137,29 @@ tempdata['Jugs_binned'] = pd.cut(tempdata['Jugs'], bins = bins, labels = labels,
 plt.hist(tempdata['Jugs_binned'], bins = 3)
 
 
+# Binning Footholds
+min_value = tempdata['Number of footholds'].min()
+max_value = tempdata['Number of footholds'].max()
+
+bins = np.linspace(min_value, max_value, 4)
+labels = ['small', 'medium', 'big']
+tempdata['Footholds_binned'] = pd.cut(tempdata['Number of footholds'], bins = bins, labels = labels, include_lowest = True)
+
+plt.hist(tempdata['Footholds_binned'], bins = 3)
+
+
 # SAME AS ABOVE
 
 # 2 way table for V0:  number of jugs and number of footholds  
 
 Jugs_Binned = "Jugs_binned"
+Footholds_Binned = "Footholds_binned"
 V0data = tempdata
 for i in tempdata.index:
     if (tempdata["Given Grade"][i] != 0):
         V0data = V0data.drop([tempdata.index[i]])
         
-V0_table = pd.crosstab(index = V0data["Number of footholds"],
+V0_table = pd.crosstab(index = V0data[Footholds_Binned],
                        columns = V0data[Jugs_Binned])
 
 #V0_table = sns.heatmap(pd.crosstab(index = V0data["Number of footholds"],
@@ -163,7 +175,7 @@ for i in tempdata.index:
     if (tempdata["Given Grade"][i] != 1):
         V1data = V1data.drop([tempdata.index[i]])
         
-V1_table = pd.crosstab(index = V1data["Number of footholds"],
+V1_table = pd.crosstab(index = V1data[Footholds_Binned],
                        columns = V1data[Jugs_Binned])
 
 
@@ -172,7 +184,7 @@ for i in tempdata.index:
     if (tempdata["Given Grade"][i] != 2):
         V2data = V2data.drop([tempdata.index[i]])
         
-V2_table = pd.crosstab(index = V2data["Number of footholds"],
+V2_table = pd.crosstab(index = V2data[Footholds_Binned],
                        columns = V2data[Jugs_Binned])
 
 V3data = tempdata
@@ -180,30 +192,30 @@ for i in tempdata.index:
     if (tempdata["Given Grade"][i] != 3):
         V3data = V3data.drop([tempdata.index[i]])
         
-V3_table = pd.crosstab(index = V3data["Number of footholds"],
+V3_table = pd.crosstab(index = V3data[Footholds_Binned],
                        columns = V3data[Jugs_Binned])
 
-
+# footholds, jugs
 try:
-    ProbGivenData_V0 = V0_table.at[8,'big'] / V0data[Jugs_Binned].size   # Probability the given data is a v0
+    ProbGivenData_V0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability the given data is a v0
 except:
     ProbGivenData_V0 = 0
 Prob_V0 = V0data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v0
 
 try:
-    ProbGivenData_V1 = V1_table.at[8,'big'] / V1data[Jugs_Binned].size   # Probability the given data is a v1
+    ProbGivenData_V1 = V1_table.at['small','small'] / V1data[Jugs_Binned].size   # Probability the given data is a v1
 except:
     ProbGivenData_V1 = 0
 Prob_V1 = V1data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v1
  
 try:
-    ProbGivenData_V2 = V2_table.at[8,'big'] / V2data[Jugs_Binned].size   # Probability the given data is a v2
+    ProbGivenData_V2 = V2_table.at['small','small'] / V2data[Jugs_Binned].size   # Probability the given data is a v2
 except:
     ProbGivenData_V2 = 0    
 Prob_V2 = V2data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v2
 
 try:
-    ProbGivenData_V3 = V3_table.at[8,'big'] / V3data[Jugs_Binned].size   # Probability the given data is a v3
+    ProbGivenData_V3 = V3_table.at['small','small'] / V3data[Jugs_Binned].size   # Probability the given data is a v3
 except:
     ProbGivenData_V3 = 0
 Prob_V3 = V3data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v3
