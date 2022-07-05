@@ -234,3 +234,111 @@ ProbV3_GivenData = ProbGivenData_V3 * Prob_V3 / GivenData_Divided_By_Alldata
 
 
 
+
+
+
+
+# Num. Jugs and Total Crimps BINNED MAX LIKLIHOOD
+
+# Binning Jugs
+min_value = tempdata['Jugs'].min()
+max_value = tempdata['Jugs'].max()
+
+bins = np.linspace(min_value, max_value, 4)
+labels = ['small', 'medium', 'big']
+tempdata['Jugs_binned'] = pd.cut(tempdata['Jugs'], bins = bins, labels = labels, include_lowest = True)
+
+plt.hist(tempdata['Jugs_binned'], bins = 3)
+
+
+# Binning total crimps
+min_value = tempdata['Total Crimps'].min()
+max_value = tempdata['Total Crimps'].max()
+
+bins = np.linspace(min_value, max_value, 4)
+labels = ['small', 'medium', 'big']
+tempdata['Total_Crimps_Binned'] = pd.cut(tempdata['Total Crimps'], bins = bins, labels = labels, include_lowest = True)
+
+plt.hist(tempdata['Total_Crimps_Binned'], bins = 3)
+
+
+
+
+# 2 way table for V0:  number of jugs and total crimps 
+
+Jugs_Binned = "Jugs_binned"
+Crimps_Binned = "Total_Crimps_Binned"
+V0data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 0):
+        V0data = V0data.drop([tempdata.index[i]])
+        
+V0_table = pd.crosstab(index = V0data[Crimps_Binned],
+                       columns = V0data[Jugs_Binned])
+
+
+#BREAK
+
+# 2 way table for V1: number of jugs and total crimps
+
+V1data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 1):
+        V1data = V1data.drop([tempdata.index[i]])
+        
+V1_table = pd.crosstab(index = V1data[Crimps_Binned],
+                       columns = V1data[Jugs_Binned])
+
+
+V2data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 2):
+        V2data = V2data.drop([tempdata.index[i]])
+        
+V2_table = pd.crosstab(index = V2data[Crimps_Binned],
+                       columns = V2data[Jugs_Binned])
+
+V3data = tempdata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] != 3):
+        V3data = V3data.drop([tempdata.index[i]])
+        
+V3_table = pd.crosstab(index = V3data[Crimps_Binned],
+                       columns = V3data[Jugs_Binned])
+
+# total crimps, total jugs
+try:
+    ProbGivenData_V0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability the given data is a v0
+except:
+    ProbGivenData_V0 = 0
+Prob_V0 = V0data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v0
+
+try:
+    ProbGivenData_V1 = V1_table.at['small','small'] / V1data[Jugs_Binned].size   # Probability the given data is a v1
+except:
+    ProbGivenData_V1 = 0
+Prob_V1 = V1data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v1
+ 
+try:
+    ProbGivenData_V2 = V2_table.at['small','small'] / V2data[Jugs_Binned].size   # Probability the given data is a v2
+except:
+    ProbGivenData_V2 = 0    
+Prob_V2 = V2data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v2
+
+try:
+    ProbGivenData_V3 = V3_table.at['small','small'] / V3data[Jugs_Binned].size   # Probability the given data is a v3
+except:
+    ProbGivenData_V3 = 0
+Prob_V3 = V3data[Jugs_Binned].size / tempdata[Jugs_Binned].size          # Probability that a climb is v3
+
+
+GivenData_Divided_By_Alldata = ((ProbGivenData_V0 * V0data[Jugs_Binned].size) + (ProbGivenData_V1 * V1data[Jugs_Binned].size) 
++ (ProbGivenData_V2 * V2data[Jugs_Binned].size) + (ProbGivenData_V3 * V3data[Jugs_Binned].size)) / tempdata[Jugs_Binned].size 
+
+ProbV0_GivenData = ProbGivenData_V0 * Prob_V0 / GivenData_Divided_By_Alldata
+
+ProbV1_GivenData = ProbGivenData_V1 * Prob_V1 / GivenData_Divided_By_Alldata
+
+ProbV2_GivenData = ProbGivenData_V2 * Prob_V2 / GivenData_Divided_By_Alldata
+
+ProbV3_GivenData = ProbGivenData_V3 * Prob_V3 / GivenData_Divided_By_Alldata
