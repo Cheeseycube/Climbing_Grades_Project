@@ -58,8 +58,36 @@ for i in UnencodedData.index:
     if(UnencodedData["Given Grade"][i] == 0):
         print(UnencodedData["Jugs"][i])
         
+# Useful Functions
+def createV0Data():
+    V0data = UnencodedData
+    for i in UnencodedData.index:
+        if (UnencodedData["Given Grade"][i] != 0):
+            V0data = V0data.drop([UnencodedData.index[i]])
 
+def createV1Data():
+    V1data = UnencodedData
+    for i in UnencodedData.index:
+        if (UnencodedData["Given Grade"][i] != 1):
+            V1data = V1data.drop([UnencodedData.index[i]])
+            
+def createV2Data():
+    V2data = UnencodedData
+    for i in UnencodedData.index:
+        if (UnencodedData["Given Grade"][i] != 2):
+            V2data = V2data.drop([UnencodedData.index[i]])
 
+def createV3Data():
+    V3data = UnencodedData
+    for i in UnencodedData.index:
+        if (UnencodedData["Given Grade"][i] != 3):
+            V3data = V3data.drop([UnencodedData.index[i]])
+            
+def createV4Data():
+    V4data = UnencodedData
+    for i in UnencodedData.index:
+        if (UnencodedData["Given Grade"][i] != 4):
+            V4data = V4data.drop([UnencodedData.index[i]])
 
 
 # JUG DISTRIBUTION CHARTS
@@ -68,10 +96,7 @@ for i in UnencodedData.index:
 #sns.displot(UnencodedData, x="Jugs")
 
 # creating a dataset with only V0s
-V0data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 0):
-        V0data = V0data.drop([UnencodedData.index[i]])
+createV0Data()
 
 # distribution of jugs for V0s only        
 sns.displot(V0data, x="Jugs").set(title = 'Jug Distribution for V0')
@@ -217,6 +242,56 @@ sns.displot(V4data, x="Total Crimps").set(title = 'Total Crimps distribution for
 
 
 # DIFFICULT CRIMPS DISTRIBUTION CHARTS
+
+# creating a dataset with only V0s
+V0data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 0):
+        V0data = V0data.drop([UnencodedData.index[i]])
+
+# distribution of difficult Crimps for V0s only        
+sns.displot(V0data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V0")
+
+
+# creating a dataset with only V1s
+V1data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 1):
+        V1data = V1data.drop([UnencodedData.index[i]])
+
+# distribution of difficult Crimps for V1s only        
+sns.displot(V1data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V1")
+
+
+# creating a dataset with only V2s
+V2data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 2):
+        V2data = V2data.drop([UnencodedData.index[i]])
+
+# distribution of difficult Crimps for V2s only        
+sns.displot(V2data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V2")
+
+# creating a dataset with only V3s
+V3data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 3):
+        V3data = V3data.drop([UnencodedData.index[i]])
+
+# distribution of difficult Crimps for V3s only        
+sns.displot(V3data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V3")
+
+# creating a dataset with only V4s
+V4data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 4):
+        V4data = V4data.drop([UnencodedData.index[i]])
+
+# distribution of difficult crimps for V4s only        
+sns.displot(V4data, x="difficult crimps").set(title = 'Difficult Crimps distribution for V4')
+
+
+# WALL ANGLE DISTRIBUTION CHARTS
 
 # creating a dataset with only V0s
 V0data = UnencodedData
