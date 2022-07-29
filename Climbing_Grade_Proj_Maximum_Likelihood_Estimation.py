@@ -124,7 +124,7 @@ ProbV3_GivenData = ProbGivenData_V3 * Prob_V3 / GivenData_Divided_By_Alldata
 
 
 
-# SAME STUFF BUT WITH BINNED DATA
+# SAME STUFF BUT WITH BINNED DATA (Num. Jugs and Num. Footholds)
 
 # Binning Jugs
 min_value = tempdata['Jugs'].min()
