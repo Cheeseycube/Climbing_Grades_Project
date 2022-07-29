@@ -22,7 +22,7 @@ UnencodedData = mydata
 
 # dropping empty rows at the bottom   This works by checking each index in the original dataset, then removing that specific row from the new dataset regardless of index
 # first argument is row to start on, second is one over the row to end on
-for x in range(21, 29):
+for x in range(25, 29):
     UnencodedData = UnencodedData.drop([mydata.index[x]])
     
 #UnencodedData = UnencodedData.drop([mydata.index[17], mydata.index[18]])
@@ -116,11 +116,7 @@ sns.displot(V4data, x="Jugs").set(title = 'Jug Distribution for V4')
 
 
 
-# idea: look at num footholds / total length or num handholds / total length
-
-# research maximum liklihood estimation
-
-# NUMBER OF FOOTHOLDS DISTRIBUTION CHART
+# NUMBER OF FOOTHOLDS DISTRIBUTION CHARTS
 
 # creating a dataset with only V0s
 V0data = UnencodedData
@@ -160,6 +156,14 @@ for i in UnencodedData.index:
 # distribution of Number of footholds for V3s only        
 sns.displot(V3data, x="Number of footholds").set(title = 'Foothold distribution for V3')
 
+# creating a dataset with only V4s
+V4data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 4):
+        V4data = V4data.drop([UnencodedData.index[i]])
+
+# distribution of jugs for V4s only        
+sns.displot(V4data, x="Number of footholds").set(title = 'Foothold distribution for V4')
 
 
 #  TOTAL CRIMPS DISTRIBUTION CHART
@@ -202,7 +206,14 @@ for i in UnencodedData.index:
 # distribution of Total Crimps for V3s only        
 sns.displot(V3data, x="Total Crimps")
 
+# creating a dataset with only V4s
+V4data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 4):
+        V4data = V4data.drop([UnencodedData.index[i]])
 
+# distribution of jugs for V4s only        
+sns.displot(V4data, x="Total Crimps").set(title = 'Total Crimps distribution for V4')
 
 
 # DIFFICULT CRIMPS DISTRIBUTION CHARTS
@@ -244,3 +255,12 @@ for i in UnencodedData.index:
 
 # distribution of difficult Crimps for V3s only        
 sns.displot(V3data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V3")
+
+# creating a dataset with only V4s
+V4data = UnencodedData
+for i in UnencodedData.index:
+    if (UnencodedData["Given Grade"][i] != 4):
+        V4data = V4data.drop([UnencodedData.index[i]])
+
+# distribution of difficult crimps for V4s only        
+sns.displot(V4data, x="difficult crimps").set(title = 'Difficult Crimps distribution for V4')
