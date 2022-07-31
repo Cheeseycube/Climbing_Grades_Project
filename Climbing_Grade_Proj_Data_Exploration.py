@@ -43,7 +43,7 @@ mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
 
 # FOR DUMMY ENCODED VARIABLES
 # prints out the number of jugs for each V0
-
+'''
 print("Number of jugs for each V0:")
 for i in mydata.index:
     #print(mydata["V_0.0"][i], mydata["V_1.0"][i])
@@ -57,37 +57,44 @@ print("Same thing but using different code:")
 for i in UnencodedData.index:
     if(UnencodedData["Given Grade"][i] == 0):
         print(UnencodedData["Jugs"][i])
-        
+ '''
+       
 # Useful Functions
 def createV0Data():
     V0data = UnencodedData
+    ex_var = 1
     for i in UnencodedData.index:
         if (UnencodedData["Given Grade"][i] != 0):
             V0data = V0data.drop([UnencodedData.index[i]])
+    return V0data
 
 def createV1Data():
     V1data = UnencodedData
     for i in UnencodedData.index:
         if (UnencodedData["Given Grade"][i] != 1):
             V1data = V1data.drop([UnencodedData.index[i]])
+    return V1data
             
 def createV2Data():
     V2data = UnencodedData
     for i in UnencodedData.index:
         if (UnencodedData["Given Grade"][i] != 2):
             V2data = V2data.drop([UnencodedData.index[i]])
+    return V2data
 
 def createV3Data():
     V3data = UnencodedData
     for i in UnencodedData.index:
         if (UnencodedData["Given Grade"][i] != 3):
             V3data = V3data.drop([UnencodedData.index[i]])
+    return V3data
             
 def createV4Data():
     V4data = UnencodedData
     for i in UnencodedData.index:
         if (UnencodedData["Given Grade"][i] != 4):
             V4data = V4data.drop([UnencodedData.index[i]])
+    return V4data
 
 
 # JUG DISTRIBUTION CHARTS
@@ -95,40 +102,22 @@ def createV4Data():
 # distribution including entire dataset
 #sns.displot(UnencodedData, x="Jugs")
 
-# creating a dataset with only V0s
-createV0Data()
+
 
 # distribution of jugs for V0s only        
-sns.displot(V0data, x="Jugs").set(title = 'Jug Distribution for V0')
+sns.displot(createV0Data(), x="Jugs").set(title = 'Jug Distribution for V0')
 
-
-# creating a dataset with only V1s
-V1data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 1):
-        V1data = V1data.drop([UnencodedData.index[i]])
 
 # distribution of jugs for V1s only        
-sns.displot(V1data, x="Jugs").set(title = 'Jug Distribution for V1')
+sns.displot(createV1Data(), x="Jugs").set(title = 'Jug Distribution for V1')
 
-
-# creating a dataset with only V2s
-V2data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 2):
-        V2data = V2data.drop([UnencodedData.index[i]])
 
 # distribution of jugs for V2s only        
-sns.displot(V2data, x="Jugs").set(title = 'Jug Distribution for V2')
+sns.displot(createV2Data(), x="Jugs").set(title = 'Jug Distribution for V2')
 
-# creating a dataset with only V3s
-V3data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 3):
-        V3data = V3data.drop([UnencodedData.index[i]])
 
 # distribution of jugs for V3s only        
-sns.displot(V3data, x="Jugs").set(title = 'Jug Distribution for V3')
+sns.displot(createV3Data(), x="Jugs").set(title = 'Jug Distribution for V3')
 
 # creating a dataset with only V4s
 V4data = UnencodedData
@@ -143,102 +132,46 @@ sns.displot(V4data, x="Jugs").set(title = 'Jug Distribution for V4')
 
 # NUMBER OF FOOTHOLDS DISTRIBUTION CHARTS
 
-# creating a dataset with only V0s
-V0data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 0):
-        V0data = V0data.drop([UnencodedData.index[i]])
-
 # distribution of Number of footholds for V0s only        
-sns.displot(V0data, x="Number of footholds").set(title = 'Foothold distribution for V0')
+sns.displot(createV0Data(), x="Number of footholds").set(title = 'Foothold distribution for V0')
 
-
-# creating a dataset with only V1s
-V1data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 1):
-        V1data = V1data.drop([UnencodedData.index[i]])
 
 # distribution of Number of footholds for V1s only        
-sns.displot(V1data, x="Number of footholds").set(title = 'Foothold distribution for V1')
+sns.displot(createV1Data(), x="Number of footholds").set(title = 'Foothold distribution for V1')
 
-
-# creating a dataset with only V2s
-V2data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 2):
-        V2data = V2data.drop([UnencodedData.index[i]])
 
 # distribution of Number of footholds for V2s only        
-sns.displot(V2data, x="Number of footholds").set(title = 'Foothold distribution for V2')
+sns.displot(createV2Data(), x="Number of footholds").set(title = 'Foothold distribution for V2')
 
-# creating a dataset with only V3s
-V3data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 3):
-        V3data = V3data.drop([UnencodedData.index[i]])
 
 # distribution of Number of footholds for V3s only        
-sns.displot(V3data, x="Number of footholds").set(title = 'Foothold distribution for V3')
+sns.displot(createV3Data(), x="Number of footholds").set(title = 'Foothold distribution for V3')
 
-# creating a dataset with only V4s
-V4data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 4):
-        V4data = V4data.drop([UnencodedData.index[i]])
 
 # distribution of jugs for V4s only        
-sns.displot(V4data, x="Number of footholds").set(title = 'Foothold distribution for V4')
+sns.displot(createV4Data(), x="Number of footholds").set(title = 'Foothold distribution for V4')
 
 
 #  TOTAL CRIMPS DISTRIBUTION CHART
 
-# creating a dataset with only V0s
-V0data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 0):
-        V0data = V0data.drop([UnencodedData.index[i]])
-
 # distribution of Total Crimps for V0s only        
-sns.displot(V0data, x="Total Crimps")
+sns.displot(createV0Data(), x="Total Crimps")
 
-
-# creating a dataset with only V1s
-V1data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 1):
-        V1data = V1data.drop([UnencodedData.index[i]])
 
 # distribution of Total Crimps for V1s only        
-sns.displot(V1data, x="Total Crimps")
+sns.displot(createV1Data(), x="Total Crimps")
 
-
-# creating a dataset with only V2s
-V2data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 2):
-        V2data = V2data.drop([UnencodedData.index[i]])
 
 # distribution of Total Crimps for V2s only        
-sns.displot(V2data, x="Total Crimps")
+sns.displot(createV2Data(), x="Total Crimps")
 
-# creating a dataset with only V3s
-V3data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 3):
-        V3data = V3data.drop([UnencodedData.index[i]])
 
 # distribution of Total Crimps for V3s only        
-sns.displot(V3data, x="Total Crimps")
+sns.displot(createV3Data(), x="Total Crimps")
 
-# creating a dataset with only V4s
-V4data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 4):
-        V4data = V4data.drop([UnencodedData.index[i]])
 
 # distribution of jugs for V4s only        
-sns.displot(V4data, x="Total Crimps").set(title = 'Total Crimps distribution for V4')
+sns.displot(createV4Data(), x="Total Crimps").set(title = 'Total Crimps distribution for V4')
 
 
 # DIFFICULT CRIMPS DISTRIBUTION CHARTS

@@ -197,7 +197,7 @@ V3_table = pd.crosstab(index = V3data[Footholds_Binned],
 
 # footholds, jugs
 try:
-    ProbGivenData_V0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability the given data is a v0
+    ProbGivenData_V0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability of the given data given a v0
 except:
     ProbGivenData_V0 = 0 # sets the probability to 0 if no data is found
 Prob_V0 = V0data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v0
