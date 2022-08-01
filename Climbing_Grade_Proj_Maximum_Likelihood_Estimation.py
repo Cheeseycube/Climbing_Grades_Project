@@ -19,9 +19,26 @@ mydata = mydata.drop('Observations', 1) # Dropping the observations column. 1 fo
 mydata = mydata.drop('Size of holds', 1)
 mydata = mydata.drop('Distance between holds for intended beta', 1)
 
+# REMOVES V4 V7 and V10 FROM THE DATASET
+tempdata = mydata
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] == 4):
+        mydata = mydata.drop([tempdata.index[i]])
+
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] == 7):
+        mydata = mydata.drop([tempdata.index[i]])
+        
+for i in tempdata.index:
+    if (tempdata["Given Grade"][i] == 10):
+        mydata = mydata.drop([tempdata.index[i]])
+        
+
     
 UnencodedData = mydata
 
+
+# update the below code if removing v4 v7 v10
 
 # dropping empty rows at the bottom   This works by checking each index in the original dataset, then removing that specific row from the new dataset regardless of index
 # first argument is row to start on, second is one over the row to end on
@@ -39,6 +56,8 @@ UnencodedData = UnencodedData.fillna(0)
 mis_val = mydata.isnull().sum()
 mydata = mydata.fillna(0)
 mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
+
+
 
 
 
@@ -87,40 +106,40 @@ V3_table = pd.crosstab(index = V3data["Number of footholds"],
 
 
 try:
-    ProbGivenData_V0 = V0_table.at[8,11] / V0data["Jugs"].size   # Probability the given data is a v0
+    ProbData_GivenV0 = V0_table.at[8,11] / V0data["Jugs"].size   # Probability of the data given a v0
 except:
-    ProbGivenData_V0 = 0
+    ProbData_GivenV0 = 0
 Prob_V0 = V0data["Jugs"].size / UnencodedData["Jugs"].size          # Probability that a climb is v0
 
 try:
-    ProbGivenData_V1 = V1_table.at[8,11] / V1data["Jugs"].size   # Probability the given data is a v1
+    ProbData_GivenV1 = V1_table.at[8,11] / V1data["Jugs"].size   # Probability of the data given a v1
 except:
-    ProbGivenData_V1 = 0
+    ProbData_GivenV1 = 0
 Prob_V1 = V1data["Jugs"].size / UnencodedData["Jugs"].size          # Probability that a climb is v1
  
 try:
-    ProbGivenData_V2 = V2_table.at[8,11] / V2data["Jugs"].size   # Probability the given data is a v2
+    ProbData_GivenV2 = V2_table.at[8,11] / V2data["Jugs"].size   # Probability of the data given a v2
 except:
-    ProbGivenData_V2 = 0    
+    ProbData_GivenV2 = 0    
 Prob_V2 = V2data["Jugs"].size / UnencodedData["Jugs"].size          # Probability that a climb is v2
 
 try:
-    ProbGivenData_V3 = V3_table.at[8,11] / V3data["Jugs"].size   # Probability the given data is a v3
+    ProbData_GivenV3 = V3_table.at[8,11] / V3data["Jugs"].size   # Probability of the data given a v3
 except:
-    ProbGivenData_V3 = 0
+    ProbData_GivenV3 = 0
 Prob_V3 = V3data["Jugs"].size / UnencodedData["Jugs"].size          # Probability that a climb is v3
 
 
-GivenData_Divided_By_Alldata = ((ProbGivenData_V0 * V0data["Jugs"].size) + (ProbGivenData_V1 * V1data["Jugs"].size) 
-+ (ProbGivenData_V2 * V2data["Jugs"].size) + (ProbGivenData_V3 * V3data["Jugs"].size)) / mydata["Jugs"].size 
+GivenData_Divided_By_Alldata = ((ProbData_GivenV0 * V0data["Jugs"].size) + (ProbData_GivenV1 * V1data["Jugs"].size) 
++ (ProbData_GivenV2 * V2data["Jugs"].size) + (ProbData_GivenV3 * V3data["Jugs"].size)) / mydata["Jugs"].size 
 
-ProbV0_GivenData = ProbGivenData_V0 * Prob_V0 / GivenData_Divided_By_Alldata
+ProbV0_GivenData = ProbData_GivenV0 * Prob_V0 / GivenData_Divided_By_Alldata
 
-ProbV1_GivenData = ProbGivenData_V1 * Prob_V1 / GivenData_Divided_By_Alldata
+ProbV1_GivenData = ProbData_GivenV1 * Prob_V1 / GivenData_Divided_By_Alldata
 
-ProbV2_GivenData = ProbGivenData_V2 * Prob_V2 / GivenData_Divided_By_Alldata
+ProbV2_GivenData = ProbData_GivenV2 * Prob_V2 / GivenData_Divided_By_Alldata
 
-ProbV3_GivenData = ProbGivenData_V3 * Prob_V3 / GivenData_Divided_By_Alldata
+ProbV3_GivenData = ProbData_GivenV3 * Prob_V3 / GivenData_Divided_By_Alldata
 
 
 
@@ -197,50 +216,45 @@ V3_table = pd.crosstab(index = V3data[Footholds_Binned],
 
 # footholds, jugs
 try:
-    ProbGivenData_V0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability of the given data given a v0
+    ProbData_GivenV0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability of the data given a v0
 except:
-    ProbGivenData_V0 = 0 # sets the probability to 0 if no data is found
+    ProbData_GivenV0 = 0 # sets the probability to 0 if no data is found
 Prob_V0 = V0data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v0
 
 try:
-    ProbGivenData_V1 = V1_table.at['small','small'] / V1data[Jugs_Binned].size   # Probability the given data is a v1
+    ProbData_GivenV1 = V1_table.at['small','small'] / V1data[Jugs_Binned].size   # Probability of the data given a v1
 except:
-    ProbGivenData_V1 = 0 # sets the probability to 0 if no data is found
+    ProbData_GivenV1 = 0 # sets the probability to 0 if no data is found
 Prob_V1 = V1data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v1
  
 try:
-    ProbGivenData_V2 = V2_table.at['small','small'] / V2data[Jugs_Binned].size   # Probability the given data is a v2
+    ProbData_GivenV2 = V2_table.at['small','small'] / V2data[Jugs_Binned].size   # Probability of the data given a v2
 except:
-    ProbGivenData_V2 = 0 # sets the probability to 0 if no data is found
+    ProbData_GivenV2 = 0 # sets the probability to 0 if no data is found
 Prob_V2 = V2data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v2
 
 try:
-    ProbGivenData_V3 = V3_table.at['small','small'] / V3data[Jugs_Binned].size   # Probability the given data is a v3
+    ProbData_GivenV3 = V3_table.at['small','small'] / V3data[Jugs_Binned].size   # Probability of the data given a v3
 except:
-    ProbGivenData_V3 = 0 # sets the probability to 0 if no data is found
+    ProbData_GivenV3 = 0 # sets the probability to 0 if no data is found
 Prob_V3 = V3data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v3
 
 
-GivenData_Divided_By_Alldata = ((ProbGivenData_V0 * V0data[Jugs_Binned].size) + (ProbGivenData_V1 * V1data[Jugs_Binned].size) 
-+ (ProbGivenData_V2 * V2data[Jugs_Binned].size) + (ProbGivenData_V3 * V3data[Jugs_Binned].size)) / UnencodedData[Jugs_Binned].size 
+GivenData_Divided_By_Alldata = ((ProbData_GivenV0 * V0data[Jugs_Binned].size) + (ProbData_GivenV1 * V1data[Jugs_Binned].size) 
++ (ProbData_GivenV2 * V2data[Jugs_Binned].size) + (ProbData_GivenV3 * V3data[Jugs_Binned].size)) / UnencodedData[Jugs_Binned].size 
 
-ProbV0_GivenData = ProbGivenData_V0 * Prob_V0 / GivenData_Divided_By_Alldata
+ProbV0_GivenData = ProbData_GivenV0 * Prob_V0 / GivenData_Divided_By_Alldata
 
-ProbV1_GivenData = ProbGivenData_V1 * Prob_V1 / GivenData_Divided_By_Alldata
+ProbV1_GivenData = ProbData_GivenV1 * Prob_V1 / GivenData_Divided_By_Alldata
 
-ProbV2_GivenData = ProbGivenData_V2 * Prob_V2 / GivenData_Divided_By_Alldata
+ProbV2_GivenData = ProbData_GivenV2 * Prob_V2 / GivenData_Divided_By_Alldata
 
-ProbV3_GivenData = ProbGivenData_V3 * Prob_V3 / GivenData_Divided_By_Alldata
-
-
-# so basically here is the plan: if the probability of the climb being V3 is more than 50% then we can check if it is V4+
+ProbV3_GivenData = ProbData_GivenV3 * Prob_V3 / GivenData_Divided_By_Alldata
 
 
 
 
-
-
-# Num. Jugs and Total Crimps BINNED MAX LIKLIHOOD
+# Num. Jugs and Total Crimps BINNED MAX LIKLIEHOOD
 
 # Binning Jugs
 min_value = UnencodedData['Jugs'].min()
@@ -310,40 +324,40 @@ V3_table = pd.crosstab(index = V3data[Crimps_Binned],
 
 # total crimps, total jugs
 try:
-    ProbGivenData_V0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability the given data is a v0
+    ProbData_GivenV0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability of the data given a v0
 except:
-    ProbGivenData_V0 = 0
+    ProbData_GivenV0 = 0
 Prob_V0 = V0data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v0
 
 try:
-    ProbGivenData_V1 = V1_table.at['small','small'] / V1data[Jugs_Binned].size   # Probability the given data is a v1
+    ProbData_GivenV1 = V1_table.at['small','small'] / V1data[Jugs_Binned].size   # Probability of the data given a v1
 except:
-    ProbGivenData_V1 = 0
+    ProbData_GivenV1 = 0
 Prob_V1 = V1data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v1
  
 try:
-    ProbGivenData_V2 = V2_table.at['small','small'] / V2data[Jugs_Binned].size   # Probability the given data is a v2
+    ProbData_GivenV2 = V2_table.at['small','small'] / V2data[Jugs_Binned].size   # Probability of the data given a v2
 except:
-    ProbGivenData_V2 = 0    
+    ProbData_GivenV2 = 0    
 Prob_V2 = V2data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v2
 
 try:
-    ProbGivenData_V3 = V3_table.at['small','small'] / V3data[Jugs_Binned].size   # Probability the given data is a v3
+    ProbData_GivenV3 = V3_table.at['small','small'] / V3data[Jugs_Binned].size   # Probability of the data given a v3
 except:
-    ProbGivenData_V3 = 0
+    ProbData_GivenV3 = 0
 Prob_V3 = V3data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v3
 
 
-GivenData_Divided_By_Alldata = ((ProbGivenData_V0 * V0data[Jugs_Binned].size) + (ProbGivenData_V1 * V1data[Jugs_Binned].size) 
-+ (ProbGivenData_V2 * V2data[Jugs_Binned].size) + (ProbGivenData_V3 * V3data[Jugs_Binned].size)) / UnencodedData[Jugs_Binned].size 
+GivenData_Divided_By_Alldata = ((ProbData_GivenV0 * V0data[Jugs_Binned].size) + (ProbData_GivenV1 * V1data[Jugs_Binned].size) 
++ (ProbData_GivenV2 * V2data[Jugs_Binned].size) + (ProbData_GivenV3 * V3data[Jugs_Binned].size)) / UnencodedData[Jugs_Binned].size 
 
-ProbV0_GivenData = ProbGivenData_V0 * Prob_V0 / GivenData_Divided_By_Alldata
+ProbV0_GivenData = ProbData_GivenV0 * Prob_V0 / GivenData_Divided_By_Alldata
 
-ProbV1_GivenData = ProbGivenData_V1 * Prob_V1 / GivenData_Divided_By_Alldata
+ProbV1_GivenData = ProbData_GivenV1 * Prob_V1 / GivenData_Divided_By_Alldata
 
-ProbV2_GivenData = ProbGivenData_V2 * Prob_V2 / GivenData_Divided_By_Alldata
+ProbV2_GivenData = ProbData_GivenV2 * Prob_V2 / GivenData_Divided_By_Alldata
 
-ProbV3_GivenData = ProbGivenData_V3 * Prob_V3 / GivenData_Divided_By_Alldata
+ProbV3_GivenData = ProbData_GivenV3 * Prob_V3 / GivenData_Divided_By_Alldata
 
 
 

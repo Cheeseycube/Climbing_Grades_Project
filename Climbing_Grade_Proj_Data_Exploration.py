@@ -29,15 +29,17 @@ for x in range(25, 29):
 
 mydata = UnencodedData
 
-# this is the same dataset but without any dummy-encoding
+# this is the same dataset but without any dummy-encoding 
 UnencodedData = UnencodedData.fillna(0)
 
 
 mis_val = mydata.isnull().sum()
 mydata = mydata.fillna(0)
 mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
+mydata = pd.get_dummies(mydata, columns = ["Wall angle"], prefix = ["Deg"])
 
-
+for col in mydata.columns:
+    print(col)
 
 # practicing data visualization techniques...
 
@@ -62,7 +64,6 @@ for i in UnencodedData.index:
 # Useful Functions
 def createV0Data():
     V0data = UnencodedData
-    ex_var = 1
     for i in UnencodedData.index:
         if (UnencodedData["Given Grade"][i] != 0):
             V0data = V0data.drop([UnencodedData.index[i]])
@@ -96,37 +97,29 @@ def createV4Data():
             V4data = V4data.drop([UnencodedData.index[i]])
     return V4data
 
+def createEncodedV0Data():
+    EncodedV0Data = mydata
+    for i in mydata.index:
+        if (mydata["V_0.0"][i] != 1):
+            EncodedV0Data = EncodedV0Data.drop([mydata.index[i]])
+    return EncodedV0Data
 
 # JUG DISTRIBUTION CHARTS
-
-# distribution including entire dataset
-#sns.displot(UnencodedData, x="Jugs")
-
-
 
 # distribution of jugs for V0s only        
 sns.displot(createV0Data(), x="Jugs").set(title = 'Jug Distribution for V0')
 
-
 # distribution of jugs for V1s only        
 sns.displot(createV1Data(), x="Jugs").set(title = 'Jug Distribution for V1')
-
 
 # distribution of jugs for V2s only        
 sns.displot(createV2Data(), x="Jugs").set(title = 'Jug Distribution for V2')
 
-
 # distribution of jugs for V3s only        
 sns.displot(createV3Data(), x="Jugs").set(title = 'Jug Distribution for V3')
 
-# creating a dataset with only V4s
-V4data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 4):
-        V4data = V4data.drop([UnencodedData.index[i]])
-
 # distribution of jugs for V4s only        
-sns.displot(V4data, x="Jugs").set(title = 'Jug Distribution for V4')
+sns.displot(createV4Data(), x="Jugs").set(title = 'Jug Distribution for V4')
 
 
 
@@ -135,140 +128,154 @@ sns.displot(V4data, x="Jugs").set(title = 'Jug Distribution for V4')
 # distribution of Number of footholds for V0s only        
 sns.displot(createV0Data(), x="Number of footholds").set(title = 'Foothold distribution for V0')
 
-
 # distribution of Number of footholds for V1s only        
 sns.displot(createV1Data(), x="Number of footholds").set(title = 'Foothold distribution for V1')
-
 
 # distribution of Number of footholds for V2s only        
 sns.displot(createV2Data(), x="Number of footholds").set(title = 'Foothold distribution for V2')
 
-
 # distribution of Number of footholds for V3s only        
 sns.displot(createV3Data(), x="Number of footholds").set(title = 'Foothold distribution for V3')
-
 
 # distribution of jugs for V4s only        
 sns.displot(createV4Data(), x="Number of footholds").set(title = 'Foothold distribution for V4')
 
 
-#  TOTAL CRIMPS DISTRIBUTION CHART
+
+#  TOTAL CRIMPS DISTRIBUTION CHARTS
 
 # distribution of Total Crimps for V0s only        
 sns.displot(createV0Data(), x="Total Crimps")
-
+plt.title("Total Crimps Distribution for V0", fontsize = 15, color = "red")
+plt.ylim(0, 5)
+plt.xlim(0, 10)
+plt.xlabel("Number of Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of Total Crimps for V1s only        
 sns.displot(createV1Data(), x="Total Crimps")
-
+plt.title("Total Crimps Distribution for V1", fontsize = 15, color = "red")
+plt.ylim(0, 5)
+plt.xlim(0, 10)
+plt.xlabel("Number of Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of Total Crimps for V2s only        
 sns.displot(createV2Data(), x="Total Crimps")
-
+plt.title("Total Crimps Distribution for V2", fontsize = 15, color = "red")
+plt.ylim(0, 5)
+plt.xlim(0, 10)
+plt.xlabel("Number of Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of Total Crimps for V3s only        
 sns.displot(createV3Data(), x="Total Crimps")
-
+plt.title("Total Crimps Distribution for V3", fontsize = 15, color = "red")
+plt.ylim(0, 5)
+plt.xlim(0, 10)
+plt.xlabel("Number of Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of jugs for V4s only        
-sns.displot(createV4Data(), x="Total Crimps").set(title = 'Total Crimps distribution for V4')
+sns.displot(createV4Data(), x="Total Crimps")
+plt.title("Total Crimps Distribution for V4", fontsize = 15, color = "red")
+plt.ylim(0, 5)
+plt.xlim(0, 10)
+plt.xlabel("Number of Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
 
 
 # DIFFICULT CRIMPS DISTRIBUTION CHARTS
 
-# creating a dataset with only V0s
-V0data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 0):
-        V0data = V0data.drop([UnencodedData.index[i]])
-
 # distribution of difficult Crimps for V0s only        
-sns.displot(V0data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V0")
-
-
-# creating a dataset with only V1s
-V1data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 1):
-        V1data = V1data.drop([UnencodedData.index[i]])
+sns.displot(createV0Data(), x="difficult crimps")
+plt.title("Difficult Crimps Distribution for V0", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 4)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of difficult Crimps for V1s only        
-sns.displot(V1data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V1")
-
-
-# creating a dataset with only V2s
-V2data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 2):
-        V2data = V2data.drop([UnencodedData.index[i]])
+sns.displot(createV1Data(), x="difficult crimps")
+plt.title("Difficult Crimps Distribution for V1", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 4)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of difficult Crimps for V2s only        
-sns.displot(V2data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V2")
-
-# creating a dataset with only V3s
-V3data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 3):
-        V3data = V3data.drop([UnencodedData.index[i]])
+sns.displot(createV2Data(), x="difficult crimps")
+plt.title("Difficult Crimps Distribution for V2", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 4)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of difficult Crimps for V3s only        
-sns.displot(V3data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V3")
-
-# creating a dataset with only V4s
-V4data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 4):
-        V4data = V4data.drop([UnencodedData.index[i]])
+sns.displot(createV3Data(), x="difficult crimps")
+plt.title("Difficult Crimps Distribution for V3", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 4)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of difficult crimps for V4s only        
-sns.displot(V4data, x="difficult crimps").set(title = 'Difficult Crimps distribution for V4')
+sns.displot(createV4Data(), x="difficult crimps")
+plt.title("Difficult Crimps Distribution for V4", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 4)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 
 # WALL ANGLE DISTRIBUTION CHARTS
 
-# creating a dataset with only V0s
-V0data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 0):
-        V0data = V0data.drop([UnencodedData.index[i]])
+# distribution of Wall Angle for V0s only        
+pd.Series([3, 1, 0, 0, 0], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "bar", title = "Wall Angle distribution for V0", ylim = (0, 3))
+plt.show()
 
-# distribution of difficult Crimps for V0s only        
-sns.displot(V0data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V0")
+# distribution of Wall Angle for V1s only   
+pd.Series([1, 2, 0, 1, 2], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "bar", title = "Wall Angle distribution for V1", ylim = (0, 3))
+plt.show()
+
+# distribution of Wall Angle for V2s only        
+pd.Series([1, 2, 0, 1, 3], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "bar", title = "Wall Angle distribution for V2", ylim = (0, 3))
+plt.show()
+
+# distribution of Wall Angle for V3s only        
+pd.Series([0, 2, 1, 0, 1], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "bar", title = "Wall Angle distribution for V3", ylim = (0, 3))
+plt.show()
+
+# distribution of Wall Angle for V4s only        
+pd.Series([0, 1, 0, 0, 1], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "bar", title = "Wall Angle distribution for V4", ylim = (0, 3))
+plt.show()
 
 
-# creating a dataset with only V1s
-V1data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 1):
-        V1data = V1data.drop([UnencodedData.index[i]])
+# TESTING CODE 
 
-# distribution of difficult Crimps for V1s only        
-sns.displot(V1data, x="difficult crimps").set(title = "Difficult Crimps Distribution for V1")
+tempvalues = createV3Data()["Wall angle"].value_counts().sort_index()
+SeriesToAppend = pd.Series([0,], index = [0.0])
+SeriesToAppend.name = 0
+tempvalues = tempvalues.append(SeriesToAppend)
 
+createV3Data()["Wall angle"].value_counts().sort_index().append(pd.Series([0, 0, 0], 
+                                                                          index = [30.0, 40.0, 45.0])).plot(kind = "bar", 
+                                                                                                            title = "Wall Angle distribution for V0")
+plt.show()
 
-# creating a dataset with only V2s
-V2data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 2):
-        V2data = V2data.drop([UnencodedData.index[i]])
+createV1Data()["Wall angle"].value_counts().sort_index().plot(kind = "bar", title = "Wall Angle distribution for V2")
+plt.show()
 
-# distribution of difficult Crimps for V2s only        
-sns.displot(V2data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V2")
-
-# creating a dataset with only V3s
-V3data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 3):
-        V3data = V3data.drop([UnencodedData.index[i]])
-
-# distribution of difficult Crimps for V3s only        
-sns.displot(V3data, x="difficult crimps").set(title = "Difficult Crimps Distribution Chart for V3")
-
-# creating a dataset with only V4s
-V4data = UnencodedData
-for i in UnencodedData.index:
-    if (UnencodedData["Given Grade"][i] != 4):
-        V4data = V4data.drop([UnencodedData.index[i]])
-
-# distribution of difficult crimps for V4s only        
-sns.displot(V4data, x="difficult crimps").set(title = 'Difficult Crimps distribution for V4')
+pd.Series([0, 1, 0, 0, 1], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "bar", title = "Wall Angle distribution for V4", ylim = (0, 4))
+plt.show()
