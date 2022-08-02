@@ -97,6 +97,20 @@ def createV4Data():
             V4data = V4data.drop([UnencodedData.index[i]])
     return V4data
 
+def createV7Data():
+    V7data = UnencodedData
+    for i in UnencodedData.index:
+        if (UnencodedData["Given Grade"][i] != 7):
+            V7data = V7data.drop([UnencodedData.index[i]])
+    return V7data
+
+def createV10Data():
+    V10data = UnencodedData
+    for i in UnencodedData.index:
+        if (UnencodedData["Given Grade"][i] != 10):
+            V10data = V10data.drop([UnencodedData.index[i]])
+    return V10data
+
 def createEncodedV0Data():
     EncodedV0Data = mydata
     for i in mydata.index:
@@ -196,8 +210,8 @@ plt.show()
 # distribution of difficult Crimps for V0s only        
 sns.displot(createV0Data(), x="difficult crimps")
 plt.title("Difficult Crimps Distribution for V0", fontsize = 15, color = "red")
-plt.ylim(0, 4)
-plt.xlim(0, 4)
+plt.ylim(0, 6)
+plt.xlim(0, 5)
 plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
 plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
 plt.show()
@@ -205,8 +219,8 @@ plt.show()
 # distribution of difficult Crimps for V1s only        
 sns.displot(createV1Data(), x="difficult crimps")
 plt.title("Difficult Crimps Distribution for V1", fontsize = 15, color = "red")
-plt.ylim(0, 4)
-plt.xlim(0, 4)
+plt.ylim(0, 6)
+plt.xlim(0, 5)
 plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
 plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
 plt.show()
@@ -214,8 +228,8 @@ plt.show()
 # distribution of difficult Crimps for V2s only        
 sns.displot(createV2Data(), x="difficult crimps")
 plt.title("Difficult Crimps Distribution for V2", fontsize = 15, color = "red")
-plt.ylim(0, 4)
-plt.xlim(0, 4)
+plt.ylim(0, 6)
+plt.xlim(0, 5)
 plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
 plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
 plt.show()
@@ -223,8 +237,8 @@ plt.show()
 # distribution of difficult Crimps for V3s only        
 sns.displot(createV3Data(), x="difficult crimps")
 plt.title("Difficult Crimps Distribution for V3", fontsize = 15, color = "red")
-plt.ylim(0, 4)
-plt.xlim(0, 4)
+plt.ylim(0, 6)
+plt.xlim(0, 5)
 plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
 plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
 plt.show()
@@ -232,11 +246,98 @@ plt.show()
 # distribution of difficult crimps for V4s only        
 sns.displot(createV4Data(), x="difficult crimps")
 plt.title("Difficult Crimps Distribution for V4", fontsize = 15, color = "red")
-plt.ylim(0, 4)
-plt.xlim(0, 4)
+plt.ylim(0, 6)
+plt.xlim(0, 5)
 plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
 plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
 plt.show()
+
+# distribution of difficult crimps for V7s only        
+sns.displot(createV7Data(), x="difficult crimps")
+plt.title("Difficult Crimps Distribution for V7", fontsize = 15, color = "red")
+plt.ylim(0, 6)
+plt.xlim(0, 5)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of difficult crimps for V10s only        
+sns.displot(createV10Data(), x="difficult crimps")
+plt.title("Difficult Crimps Distribution for V10", fontsize = 15, color = "red")
+plt.ylim(0, 6)
+plt.xlim(0, 5)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+
+
+# EXTREME CRIMPS DISTRIBUTION CHARTS
+
+# distribution of extreme Crimps for V0s only        
+sns.displot(createV0Data(), x="extreme crimps")
+plt.title("Extreme Crimps Distribution for V0", fontsize = 15, color = "red")
+plt.ylim(0, 7)
+plt.xlim(0, 3)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of extreme Crimps for V1s only        
+sns.displot(createV1Data(), x="extreme crimps")
+plt.title("Extreme Crimps Distribution for V1", fontsize = 15, color = "red")
+plt.ylim(0, 7)
+plt.xlim(0, 3)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of extreme Crimps for V2s only        
+sns.displot(createV2Data(), x="extreme crimps")
+plt.title("Extreme Crimps Distribution for V2", fontsize = 15, color = "red")
+plt.ylim(0, 7)
+plt.xlim(0, 3)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of extreme Crimps for V3s only        
+sns.displot(createV3Data(), x="extreme crimps")
+plt.title("Extreme Crimps Distribution for V3", fontsize = 15, color = "red")
+plt.ylim(0, 7)
+plt.xlim(0, 3)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of extreme crimps for V4s only        
+sns.displot(createV4Data(), x="extreme crimps")
+plt.title("Extreme Crimps Distribution for V4", fontsize = 15, color = "red")
+plt.ylim(0, 7)
+plt.xlim(0, 3)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of extreme crimps for V7s only        
+sns.displot(createV7Data(), x="extreme crimps")
+plt.title("Extreme Crimps Distribution for V7", fontsize = 15, color = "red")
+plt.ylim(0, 7)
+plt.xlim(0, 3)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of extreme crimps for V10s only        
+sns.displot(createV10Data(), x="extreme crimps")
+plt.title("Extreme Crimps Distribution for V10", fontsize = 15, color = "red")
+plt.ylim(0, 7)
+plt.xlim(0, 3)
+plt.xlabel("Number of Difficult Crimps", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+
 
 
 # WALL ANGLE DISTRIBUTION CHARTS
