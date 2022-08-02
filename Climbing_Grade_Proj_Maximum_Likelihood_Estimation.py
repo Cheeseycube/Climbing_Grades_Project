@@ -42,7 +42,7 @@ UnencodedData = mydata
 
 # dropping empty rows at the bottom   This works by checking each index in the original dataset, then removing that specific row from the new dataset regardless of index
 # first argument is row to start on, second is one over the row to end on
-for x in range(25, 29):
+for x in range(21, 25):
     UnencodedData = UnencodedData.drop([mydata.index[x]])
     
 #UnencodedData = UnencodedData.drop([mydata.index[17], mydata.index[18]])

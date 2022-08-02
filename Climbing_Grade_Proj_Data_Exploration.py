@@ -262,6 +262,55 @@ pd.Series([0, 1, 0, 0, 1], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "b
 plt.show()
 
 
+
+#  OVERALL DISTANCE DISTRIBUTION CHARTS
+
+# distribution of Overall Distance for V0s only      
+sns.displot(createV0Data(), x="Overall distance (ft)")
+plt.title("Overall Distance Distribution for V0", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(5, 20)
+plt.xlabel("Distance Per Climb", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of Overall Distance for V1s only       
+sns.displot(createV1Data(), x="Overall distance (ft)")
+plt.title("Overall Distance Distribution for V1", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(5, 20)
+plt.xlabel("Distance Per Climb", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of Overall Distance for V2s only          
+sns.displot(createV2Data(), x="Overall distance (ft)")
+plt.title("Overall Distance Distribution for V2", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(5, 20)
+plt.xlabel("Distance Per Climb", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of Overall Distance for V3s only        
+sns.displot(createV3Data(), x="Overall distance (ft)")
+plt.title("Overall Distance Distribution for V3", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(5, 20)
+plt.xlabel("Distance Per Climb", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution of Overall Distance for V4s only        
+sns.displot(createV4Data(), x="Overall distance (ft)")
+plt.title("Overall Distance Distribution for V4", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(5, 20)
+plt.xlabel("Distance Per Climb", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+
 # TESTING CODE 
 
 tempvalues = createV3Data()["Wall angle"].value_counts().sort_index()
