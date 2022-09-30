@@ -1,13 +1,9 @@
 # Climbing Grade Project
 # Data Exploration
-# test comment
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import linear_model
-from sklearn.linear_model import LogisticRegression
-from sklearn.feature_selection import RFE
 import seaborn as sns
 
 mydata = pd.read_excel("Climbing_Stats_ProjectVersion.xlsx")
@@ -41,6 +37,11 @@ mydata = pd.get_dummies(mydata, columns = ["Wall angle"], prefix = ["Deg"])
 for col in mydata.columns:
     print(col)
 
+sns.displot(UnencodedData, x="Given Grade")
+plt.title("Grades Distribution", fontsize = 20, color = "red")
+plt.xlabel("Given Grade", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 # practicing data visualization techniques...
 
 # FOR DUMMY ENCODED VARIABLES
@@ -121,38 +122,98 @@ def createEncodedV0Data():
 # JUG DISTRIBUTION CHARTS
 
 # distribution of jugs for V0s only        
-sns.displot(createV0Data(), x="Jugs").set(title = 'Jug Distribution for V0')
+sns.displot(createV0Data(), x="Jugs")
+plt.title("Jugs Distribution for V0", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of jugs for V1s only        
-sns.displot(createV1Data(), x="Jugs").set(title = 'Jug Distribution for V1')
+sns.displot(createV1Data(), x="Jugs")
+plt.title("Jugs Distribution for V1", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of jugs for V2s only        
-sns.displot(createV2Data(), x="Jugs").set(title = 'Jug Distribution for V2')
+sns.displot(createV2Data(), x="Jugs")
+plt.title("Jugs Distribution for V2", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of jugs for V3s only        
-sns.displot(createV3Data(), x="Jugs").set(title = 'Jug Distribution for V3')
+sns.displot(createV3Data(), x="Jugs")
+plt.title("Jugs Distribution for V3", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of jugs for V4s only        
-sns.displot(createV4Data(), x="Jugs").set(title = 'Jug Distribution for V4')
+sns.displot(createV4Data(), x="Jugs")
+plt.title("Jugs Distribution for V4", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 
 
 # NUMBER OF FOOTHOLDS DISTRIBUTION CHARTS
 
 # distribution of Number of footholds for V0s only        
-sns.displot(createV0Data(), x="Number of footholds").set(title = 'Foothold distribution for V0')
+sns.displot(createV0Data(), x="Number of footholds")
+plt.title("Foothold Distribution for V0", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(0, 14)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of Number of footholds for V1s only        
-sns.displot(createV1Data(), x="Number of footholds").set(title = 'Foothold distribution for V1')
+sns.displot(createV1Data(), x="Number of footholds")
+plt.title("Foothold Distribution for V1", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(0, 14)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of Number of footholds for V2s only        
-sns.displot(createV2Data(), x="Number of footholds").set(title = 'Foothold distribution for V2')
+sns.displot(createV2Data(), x="Number of footholds")
+plt.title("Foothold Distribution for V2", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(0, 14)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of Number of footholds for V3s only        
-sns.displot(createV3Data(), x="Number of footholds").set(title = 'Foothold distribution for V3')
+sns.displot(createV3Data(), x="Number of footholds")
+plt.title("Foothold Distribution for V3", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(0, 14)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 # distribution of jugs for V4s only        
-sns.displot(createV4Data(), x="Number of footholds").set(title = 'Foothold distribution for V4')
+sns.displot(createV4Data(), x="Number of footholds")
+plt.title("Foothold Distribution for V4", fontsize = 15, color = "red")
+plt.ylim(0, 3)
+plt.xlim(0, 14)
+plt.xlabel("Number of Jugs", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
 
 
 
@@ -411,6 +472,8 @@ plt.xlabel("Distance Per Climb", fontsize = 20, color = "red")
 plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
 plt.show()
 
+#DistancePlot = UnencodedData.plot.scatter(x='Overall distance (ft)',
+#                       y='Given Grade', c='DarkBlue')
 
 # TESTING CODE 
 

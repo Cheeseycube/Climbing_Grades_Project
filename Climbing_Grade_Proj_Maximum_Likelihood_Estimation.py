@@ -216,25 +216,25 @@ V3_table = pd.crosstab(index = V3data[Footholds_Binned],
 
 # footholds, jugs
 try:
-    ProbData_GivenV0 = V0_table.at['small','small'] / V0data[Jugs_Binned].size   # Probability of the data given a v0
+    ProbData_GivenV0 = V0_table.at['medium','small'] / V0data[Jugs_Binned].size   # Probability of the data given a v0
 except:
     ProbData_GivenV0 = 0 # sets the probability to 0 if no data is found
 Prob_V0 = V0data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v0
 
 try:
-    ProbData_GivenV1 = V1_table.at['small','small'] / V1data[Jugs_Binned].size   # Probability of the data given a v1
+    ProbData_GivenV1 = V1_table.at['medium','small'] / V1data[Jugs_Binned].size   # Probability of the data given a v1
 except:
     ProbData_GivenV1 = 0 # sets the probability to 0 if no data is found
 Prob_V1 = V1data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v1
  
 try:
-    ProbData_GivenV2 = V2_table.at['small','small'] / V2data[Jugs_Binned].size   # Probability of the data given a v2
+    ProbData_GivenV2 = V2_table.at['medium','small'] / V2data[Jugs_Binned].size   # Probability of the data given a v2
 except:
     ProbData_GivenV2 = 0 # sets the probability to 0 if no data is found
 Prob_V2 = V2data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v2
 
 try:
-    ProbData_GivenV3 = V3_table.at['small','small'] / V3data[Jugs_Binned].size   # Probability of the data given a v3
+    ProbData_GivenV3 = V3_table.at['medium','small'] / V3data[Jugs_Binned].size   # Probability of the data given a v3
 except:
     ProbData_GivenV3 = 0 # sets the probability to 0 if no data is found
 Prob_V3 = V3data[Jugs_Binned].size / UnencodedData[Jugs_Binned].size          # Probability that a climb is v3

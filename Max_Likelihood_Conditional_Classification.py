@@ -26,6 +26,22 @@ tempdata = tempdata.fillna(0)
 mis_val = tempdata.isnull().sum()
 mydata = tempdata
 
+#V0Test = mydata.iloc[0]
+#V0Test = mydata.iloc[5]
+
+#V1Test = mydata.iloc[1]
+#V1Test = mydata.iloc[2]
+
+#V2Test = mydata.iloc[3]
+#V2Test = mydata.iloc[4]
+
+#V3Test = mydata.iloc[6]
+#V3Test = mydata.iloc[10]
+
+#V4Test = mydata.iloc[21]
+
+#mydata = mydata.drop([6])
+#mydata = mydata.reset_index()
 
 # Binning Jugs
 min_value = mydata['Jugs'].min()
@@ -75,7 +91,7 @@ plt.show()
 
 
 ''' USER INTERFACE '''
-
+#print(V3Test)
 print()
 print("Welcome to my experimental Climbing Grade Program!")
 print("If you provide the following measurements for a climb this program will attempt to predict the grade:")
