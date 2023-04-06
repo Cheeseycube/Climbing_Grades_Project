@@ -4,8 +4,9 @@
  * This repo contains my capstone project for my Associate's Degree at Great Bay Community College.
  * The project is an ambitious attempt at re-inventing how commerical climbing gyms grade their climbs.
  * In particular, my goal is to create a consistent and reasonable model for grading climbs that all gyms could some day follow--as opposed to the current system of    basically grading climbs by feel.
- As of March 2023, I have created a simple but functional maximum likelihood model that predicts grades using Bay'es Theorem.  
- * Once I have more data and time to work on this I will explore other more advanced models and collect more data.
+ So far, I have created a simple but functional maximum likelihood model that predicts grades using Bayes Theorem.
+ * In particlar, the model is fairly accurate for grades below V3, which is where I have the most data.
+ * Once I have more time to work on this I will explore other more advanced models and collect more data.
  
 ## How to use my code:
  * If you want to test the model yourself, run the Climbing_Grade_Proj_Maximum_Likelihood_Estimation.py file and follow the instructions
