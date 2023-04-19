@@ -90,7 +90,7 @@ mydata["Extreme_Crimps_Binned"].value_counts().sort_index().plot(kind = "bar", t
 plt.show()
 
 
-''' USER INTERFACE '''
+''' USER INTERFACE BEGIN'''
 #print(V3Test)
 print()
 print("Welcome to my experimental Climbing Grade Program!")
@@ -150,7 +150,7 @@ else:
     print(f"{numExtremeCrimps} is a large amount of extreme crimps")
     extremecrimpInput = "big"
     
-''' USER INTERFACE '''
+''' USER INTERFACE END'''
 
 
 # Creating necessary dataframes
@@ -190,8 +190,8 @@ for i in mydata.index:
         V10data = V10data.drop([mydata.index[i]])
         
 
-# PROBABILITY OF THE DATA OCCURING GIVEN EACH GRADE
-ProbData_GivenV0 = ((V0data["Jugs_binned"].value_counts()[jugInput] / V0data["Jugs_binned"].size) # should probably add extreme crimps
+# PROBABILITY OF THE DATA OCCURRING GIVEN EACH GRADE
+ProbData_GivenV0 = ((V0data["Jugs_binned"].value_counts()[jugInput] / V0data["Jugs_binned"].size)
                     * (V0data["Footholds_binned"].value_counts()[footInput] / V0data["Jugs_binned"].size) 
                     * (V0data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V0data["Jugs_binned"].size)
                     * (V0data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V0data["Jugs_binned"].size))
@@ -226,7 +226,7 @@ ProbData_GivenV10 = ((V10data["Jugs_binned"].value_counts()[jugInput] / V10data[
                     * (V10data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V10data["Jugs_binned"].size)
                     * (V10data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V10data["Jugs_binned"].size))
 
-# PROBABILITY OF EACH GRADE OCCURING IN GENERAL
+# PROBABILITY OF EACH GRADE OCCURRING IN GENERAL
 Prob_V0 = V0data["Jugs_binned"].size / mydata["Jugs_binned"].size
 Prob_V1 = V1data["Jugs_binned"].size / mydata["Jugs_binned"].size
 Prob_V2 = V2data["Jugs_binned"].size / mydata["Jugs_binned"].size

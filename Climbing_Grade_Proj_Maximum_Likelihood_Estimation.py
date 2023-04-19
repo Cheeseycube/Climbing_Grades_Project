@@ -9,8 +9,7 @@ import scipy.stats as stats
 import seaborn as sns
 
 
-# this is only useful for jupyter notebooks as far as I can tell
-#%matplotlib inline
+
 
 mydata = pd.read_excel("Climbing_Stats_ProjectVersion.xlsx")
 
