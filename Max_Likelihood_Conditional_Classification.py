@@ -6,6 +6,7 @@
 
 import pandas as pd
 import numpy as np
+import sys
 from matplotlib import pyplot as plt
 
 # IMPORTING AND CLEANING THE DATA
@@ -189,59 +190,67 @@ for i in mydata.index:
     if (mydata["Given Grade"][i] != 10):
         V10data = V10data.drop([mydata.index[i]])
         
+        
+        
 
 # PROBABILITY OF THE DATA OCCURRING GIVEN EACH GRADE
-ProbData_GivenV0 = ((V0data["Jugs_binned"].value_counts()[jugInput] / V0data["Jugs_binned"].size)
-                    * (V0data["Footholds_binned"].value_counts()[footInput] / V0data["Jugs_binned"].size) 
-                    * (V0data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V0data["Jugs_binned"].size)
-                    * (V0data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V0data["Jugs_binned"].size))
+ProbData_GivenV0 = ((V0data["Jugs_binned"].value_counts()[jugInput] / len(V0data.index))
+                    * (V0data["Footholds_binned"].value_counts()[footInput] / len(V0data.index)) 
+                    * (V0data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V0data.index))
+                    * (V0data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V0data.index)))
 
-ProbData_GivenV1 = ((V1data["Jugs_binned"].value_counts()[jugInput] / V1data["Jugs_binned"].size) 
-                    * (V1data["Footholds_binned"].value_counts()[footInput] / V1data["Jugs_binned"].size) 
-                    * (V1data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V1data["Jugs_binned"].size)
-                    * (V1data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V1data["Jugs_binned"].size))
+ProbData_GivenV1 = ((V1data["Jugs_binned"].value_counts()[jugInput] / len(V1data.index)) 
+                    * (V1data["Footholds_binned"].value_counts()[footInput] / len(V1data.index)) 
+                    * (V1data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V1data.index))
+                    * (V1data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V1data.index)))
 
-ProbData_GivenV2 = ((V2data["Jugs_binned"].value_counts()[jugInput] / V2data["Jugs_binned"].size) 
-                    * (V2data["Footholds_binned"].value_counts()[footInput] / V2data["Jugs_binned"].size) 
-                    * (V2data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V2data["Jugs_binned"].size)
-                    * (V2data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V2data["Jugs_binned"].size))
+ProbData_GivenV2 = ((V2data["Jugs_binned"].value_counts()[jugInput] / len(V2data.index)) 
+                    * (V2data["Footholds_binned"].value_counts()[footInput] / len(V2data.index)) 
+                    * (V2data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V2data.index))
+                    * (V2data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V2data.index)))
 
-ProbData_GivenV3 = ((V3data["Jugs_binned"].value_counts()[jugInput] / V3data["Jugs_binned"].size) 
-                    * (V3data["Footholds_binned"].value_counts()[footInput] / V3data["Jugs_binned"].size) 
-                    * (V3data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V3data["Jugs_binned"].size)
-                    * (V3data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V3data["Jugs_binned"].size))
+ProbData_GivenV3 = ((V3data["Jugs_binned"].value_counts()[jugInput] / len(V3data.index)) 
+                    * (V3data["Footholds_binned"].value_counts()[footInput] / len(V3data.index)) 
+                    * (V3data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V3data.index))
+                    * (V3data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V3data.index)))
 
-ProbData_GivenV4 = ((V4data["Jugs_binned"].value_counts()[jugInput] / V4data["Jugs_binned"].size) 
-                    * (V4data["Footholds_binned"].value_counts()[footInput] / V4data["Jugs_binned"].size) 
-                    * (V4data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V4data["Jugs_binned"].size)
-                    * (V4data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V4data["Jugs_binned"].size))
+ProbData_GivenV4 = ((V4data["Jugs_binned"].value_counts()[jugInput] / len(V4data.index)) 
+                    * (V4data["Footholds_binned"].value_counts()[footInput] / len(V4data.index)) 
+                    * (V4data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V4data.index))
+                    * (V4data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V4data.index)))
 
-ProbData_GivenV7 = ((V7data["Jugs_binned"].value_counts()[jugInput] / V7data["Jugs_binned"].size) 
-                    * (V7data["Footholds_binned"].value_counts()[footInput] / V7data["Jugs_binned"].size) 
-                    * (V7data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V7data["Jugs_binned"].size)
-                    * (V7data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V7data["Jugs_binned"].size))
+ProbData_GivenV7 = ((V7data["Jugs_binned"].value_counts()[jugInput] / len(V7data.index)) 
+                    * (V7data["Footholds_binned"].value_counts()[footInput] / len(V7data.index)) 
+                    * (V7data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V7data.index))
+                    * (V7data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V7data.index)))
 
-ProbData_GivenV10 = ((V10data["Jugs_binned"].value_counts()[jugInput] / V10data["Jugs_binned"].size) 
-                    * (V10data["Footholds_binned"].value_counts()[footInput] / V10data["Jugs_binned"].size) 
-                    * (V10data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V10data["Jugs_binned"].size)
-                    * (V10data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V10data["Jugs_binned"].size))
+ProbData_GivenV10 = ((V10data["Jugs_binned"].value_counts()[jugInput] / len(V10data.index)) 
+                    * (V10data["Footholds_binned"].value_counts()[footInput] / len(V10data.index)) 
+                    * (V10data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V10data.index))
+                    * (V10data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V10data.index)))
 
 # PROBABILITY OF EACH GRADE OCCURRING IN GENERAL
-Prob_V0 = V0data["Jugs_binned"].size / mydata["Jugs_binned"].size
-Prob_V1 = V1data["Jugs_binned"].size / mydata["Jugs_binned"].size
-Prob_V2 = V2data["Jugs_binned"].size / mydata["Jugs_binned"].size
-Prob_V3 = V3data["Jugs_binned"].size / mydata["Jugs_binned"].size
-Prob_V4 = V4data["Jugs_binned"].size / mydata["Jugs_binned"].size
-Prob_V7 = V7data["Jugs_binned"].size / mydata["Jugs_binned"].size
-Prob_V10 = V10data["Jugs_binned"].size / mydata["Jugs_binned"].size
+total_row_count = len(mydata.index)
+Prob_V0 = V0data["Jugs_binned"].size / total_row_count
+Prob_V1 = V1data["Jugs_binned"].size / total_row_count
+Prob_V2 = V2data["Jugs_binned"].size / total_row_count
+Prob_V3 = V3data["Jugs_binned"].size / total_row_count
+Prob_V4 = V4data["Jugs_binned"].size / total_row_count
+Prob_V7 = V7data["Jugs_binned"].size / total_row_count
+Prob_V10 = V10data["Jugs_binned"].size / total_row_count
 
 
 
 
-GivenData_Divided_By_Alldata = ((ProbData_GivenV0 * V0data["Jugs_binned"].size) + (ProbData_GivenV1 * V1data["Jugs_binned"].size) 
-                                + (ProbData_GivenV2 * V2data["Jugs_binned"].size) + (ProbData_GivenV3 * V3data["Jugs_binned"].size) 
-                                + (ProbData_GivenV4 * V4data["Jugs_binned"].size) + (ProbData_GivenV7 * V7data["Jugs_binned"].size)
-                                + (ProbData_GivenV10 * V10data["Jugs_binned"].size)) / mydata["Jugs_binned"].size 
+GivenData_Divided_By_Alldata = ((ProbData_GivenV0 * len(V0data.index)) + (ProbData_GivenV1 * len(V1data.index)) 
+                                + (ProbData_GivenV2 * len(V2data.index)) + (ProbData_GivenV3 * len(V3data.index)) 
+                                + (ProbData_GivenV4 * len(V4data.index)) + (ProbData_GivenV7 * len(V7data.index))
+                                + (ProbData_GivenV10 * len(V10data.index))) / total_row_count 
+
+#error catching
+if GivenData_Divided_By_Alldata == 0:
+    print("Insufficient data to estimate this climb's grade, quitting program")
+    sys.exit(0)
 
 ProbV0_GivenData = ProbData_GivenV0 * Prob_V0 / GivenData_Divided_By_Alldata
 ProbV1_GivenData = ProbData_GivenV1 * Prob_V1 / GivenData_Divided_By_Alldata
