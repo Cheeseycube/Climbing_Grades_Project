@@ -8,18 +8,9 @@ import seaborn as sns
 
 mydata = pd.read_excel("Climbing_Stats_ProjectVersion.xlsx")
 
-
-mydata = mydata.drop('Observations', 1) # Dropping the observations column. 1 for cols, 0 for rows
-mydata = mydata.drop('Size of holds', 1)
-mydata = mydata.drop('Distance between holds for intended beta', 1)
-
-    
 UnencodedData = mydata
 
-# dropping empty rows at the bottom   This works by checking each index in the original dataset, then removing that specific row from the new dataset regardless of index
-# first argument is row to start on, second is one over the row to end on
-for x in range(25, 29):
-    UnencodedData = UnencodedData.drop([mydata.index[x]])
+
     
 #UnencodedData = UnencodedData.drop([mydata.index[17], mydata.index[18]])
 
@@ -27,15 +18,15 @@ mydata = UnencodedData
 
 # this is the same dataset but without any dummy-encoding 
 UnencodedData = UnencodedData.fillna(0)
-
+UnencodedData["Total Crimps Proportion"] = mydata["Total Crimps"] / mydata["Num. handholds"]
 
 mis_val = mydata.isnull().sum()
 mydata = mydata.fillna(0)
 mydata = pd.get_dummies(mydata, columns =["Given Grade"], prefix = ["V"])
 mydata = pd.get_dummies(mydata, columns = ["Wall angle"], prefix = ["Deg"])
 
-for col in mydata.columns:
-    print(col)
+
+mydata["Total Crimps Proportion"] = mydata["Total Crimps"] / mydata["Num. handholds"]
 
 sns.displot(UnencodedData, x="Given Grade")
 plt.title("Grades Distribution", fontsize = 20, color = "red")
@@ -118,6 +109,58 @@ def createEncodedV0Data():
         if (mydata["V_0.0"][i] != 1):
             EncodedV0Data = EncodedV0Data.drop([mydata.index[i]])
     return EncodedV0Data
+
+
+
+# TOTAL CRIMP PROPORTION DISTRIBUTION CHARTS
+
+# distribution for V0s only        
+sns.displot(createV0Data(), x="Total Crimps Proportion")
+plt.title("Total Crimps Proportion Distribution for V0", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Crimp Proportion", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution for V1s only        
+sns.displot(createV1Data(), x="Total Crimps Proportion")
+plt.title("Total Crimps Proportion Distribution for V1", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Crimp Proportion", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution for V2s only        
+sns.displot(createV2Data(), x="Total Crimps Proportion")
+plt.title("Total Crimps Proportion Distribution for V2", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Crimp Proportion", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution for V3s only        
+sns.displot(createV3Data(), x="Total Crimps Proportion")
+plt.title("Total Crimps Proportion Distribution for V3", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Crimp Proportion", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+# distribution for V4s only        
+sns.displot(createV4Data(), x="Total Crimps Proportion")
+plt.title("Total Crimps Proportion Distribution for V4", fontsize = 15, color = "red")
+plt.ylim(0, 4)
+plt.xlim(0, 16)
+plt.xlabel("Crimp Proportion", fontsize = 20, color = "red")
+plt.ylabel("Num. Climbs", fontsize = 20, color = "red")
+plt.show()
+
+
+
 
 # JUG DISTRIBUTION CHARTS
 
@@ -477,18 +520,4 @@ plt.show()
 
 # TESTING CODE 
 
-tempvalues = createV3Data()["Wall angle"].value_counts().sort_index()
-SeriesToAppend = pd.Series([0,], index = [0.0])
-SeriesToAppend.name = 0
-tempvalues = tempvalues.append(SeriesToAppend)
 
-createV3Data()["Wall angle"].value_counts().sort_index().append(pd.Series([0, 0, 0], 
-                                                                          index = [30.0, 40.0, 45.0])).plot(kind = "bar", 
-                                                                                                            title = "Wall Angle distribution for V0")
-plt.show()
-
-createV1Data()["Wall angle"].value_counts().sort_index().plot(kind = "bar", title = "Wall Angle distribution for V2")
-plt.show()
-
-pd.Series([0, 1, 0, 0, 1], index = [0.0, 15.0, 30.0, 40.0, 45.0]).plot(kind = "bar", title = "Wall Angle distribution for V4", ylim = (0, 4))
-plt.show()

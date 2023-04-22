@@ -1,5 +1,6 @@
 # Climbing Grade Project 
 # Max Likliehood Conditional Classification
+# This is similar to maximumum liklihood classification but it enables the use of more variables
 
 # check independence with chi-squared test of independence, the null is independent
 # do this by making the two way table and putting that in a chi-squared calculator
@@ -8,91 +9,51 @@ import pandas as pd
 import numpy as np
 import sys
 from matplotlib import pyplot as plt
+import Climbing_Grade_Proj_Functions as Functions
 
-# IMPORTING AND CLEANING THE DATA
-mydata = pd.read_excel("Climbing_Stats_ProjectVersion.xlsx")
-
-
-mydata = mydata.drop('Observations', 1) # Dropping the observations column. 1 for cols, 0 for rows
-mydata = mydata.drop('Size of holds', 1)
-mydata = mydata.drop('Distance between holds for intended beta', 1)
-
-tempdata = mydata
-
-for x in range(25, 29):
-    tempdata = tempdata.drop([mydata.index[x]])
-    
-
-tempdata = tempdata.fillna(0)    
-mis_val = tempdata.isnull().sum()
-mydata = tempdata
-
-#V0Test = mydata.iloc[0]
-#V0Test = mydata.iloc[5]
-
-#V1Test = mydata.iloc[1]
-#V1Test = mydata.iloc[2]
-
-#V2Test = mydata.iloc[3]
-#V2Test = mydata.iloc[4]
-
-#V3Test = mydata.iloc[6]
-#V3Test = mydata.iloc[10]
-
-#V4Test = mydata.iloc[21]
-
-#mydata = mydata.drop([6])
-#mydata = mydata.reset_index()
+# GETTING THE DATA
+df = Functions.get_data()
 
 # Binning Jugs
-min_value = mydata['Jugs'].min()
-max_value = mydata['Jugs'].max()
-
+min_value = df['Jugs'].min()
+max_value = df['Jugs'].max()
 JugBins = np.linspace(min_value, max_value, 4)
 labels = ['small', 'medium', 'big']
-mydata['Jugs_binned'] = pd.cut(mydata['Jugs'], bins = JugBins, labels = labels, include_lowest = True)
-
-mydata["Jugs_binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Jugs Distribution")
+df['Jugs_binned'] = pd.cut(df['Jugs'], bins = JugBins, labels = labels, include_lowest = True)
+df["Jugs_binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Jugs Distribution")
 plt.show()
 
 
 # Binning Footholds
-min_value = mydata['Number of footholds'].min()
-max_value = mydata['Number of footholds'].max()
-
+min_value = df['Number of footholds'].min()
+max_value = df['Number of footholds'].max()
 FootholdBins = np.linspace(min_value, max_value, 4)
 labels = ['small', 'medium', 'big']
-mydata['Footholds_binned'] = pd.cut(mydata['Number of footholds'], bins = FootholdBins, labels = labels, include_lowest = True)
-
-mydata["Footholds_binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Footholds Distribution")
+df['Footholds_binned'] = pd.cut(df['Number of footholds'], bins = FootholdBins, labels = labels, include_lowest = True)
+df["Footholds_binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Footholds Distribution")
 plt.show()
 
 
 # Binning total crimps
-min_value = mydata['Total Crimps'].min()
-max_value = mydata['Total Crimps'].max()
-
+min_value = df['Total Crimps'].min()
+max_value = df['Total Crimps'].max()
 TotalCrimpsBins = np.linspace(min_value, max_value, 4)
 labels = ['small', 'medium', 'big']
-mydata['Total_Crimps_Binned'] = pd.cut(mydata['Total Crimps'], bins = TotalCrimpsBins, labels = labels, include_lowest = True)
-
-mydata["Total_Crimps_Binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Total Crimps Distribution")
+df['Total_Crimps_Binned'] = pd.cut(df['Total Crimps'], bins = TotalCrimpsBins, labels = labels, include_lowest = True)
+df["Total_Crimps_Binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Total Crimps Distribution")
 plt.show()
 
 # Binning extreme crimps
-min_value = mydata['extreme crimps'].min()
-max_value = mydata['extreme crimps'].max()
-
+min_value = df['extreme crimps'].min()
+max_value = df['extreme crimps'].max()
 ExtremeCrimpsBins = np.linspace(min_value, max_value, 3)
 labels = ['small', 'big']
-mydata['Extreme_Crimps_Binned'] = pd.cut(mydata['extreme crimps'], bins = ExtremeCrimpsBins, labels = labels, include_lowest = True)
-
-mydata["Extreme_Crimps_Binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Extreme Crimps Distribution")
+df['Extreme_Crimps_Binned'] = pd.cut(df['extreme crimps'], bins = ExtremeCrimpsBins, labels = labels, include_lowest = True)
+df["Extreme_Crimps_Binned"].value_counts().sort_index().plot(kind = "bar", title = "Binned Extreme Crimps Distribution")
 plt.show()
 
 
 ''' USER INTERFACE BEGIN'''
-#print(V3Test)
 print()
 print("Welcome to my experimental Climbing Grade Program!")
 print("If you provide the following measurements for a climb this program will attempt to predict the grade:")
@@ -155,82 +116,65 @@ else:
 
 
 # Creating necessary dataframes
-V0data = mydata
-for i in mydata.index:
-    if (mydata["Given Grade"][i] != 0):
-        V0data = V0data.drop([mydata.index[i]])
-        
-V1data = mydata
-for i in mydata.index:
-    if (mydata["Given Grade"][i] != 1):
-        V1data = V1data.drop([mydata.index[i]])
+V0data = Functions.createV0Data(df)
+V0_count = len(V0data.index)
 
-V2data = mydata
-for i in mydata.index:
-    if (mydata["Given Grade"][i] != 2):
-        V2data = V2data.drop([mydata.index[i]])
+V1data = Functions.createV1Data(df)
+V1_count = len(V1data.index)
 
-V3data = mydata
-for i in mydata.index:
-    if (mydata["Given Grade"][i] != 3):
-        V3data = V3data.drop([mydata.index[i]])
-        
-V4data = mydata
-for i in mydata.index:
-    if (mydata["Given Grade"][i] != 4):
-        V4data = V4data.drop([mydata.index[i]])
-        
-V7data = mydata
-for i in mydata.index:
-    if (mydata["Given Grade"][i] != 7):
-        V7data = V7data.drop([mydata.index[i]])
+V2data = Functions.createV2Data(df)
+V2_count = len(V2data.index)
 
-V10data = mydata
-for i in mydata.index:
-    if (mydata["Given Grade"][i] != 10):
-        V10data = V10data.drop([mydata.index[i]])
-        
-        
-        
+V3data = Functions.createV3Data(df)
+V3_count = len(V3data.index)
+
+V4data = Functions.createV4Data(df)
+V4_count = len(V4data.index)
+
+V7data = Functions.createV7Data(df)
+V7_count = len(V7data.index)
+
+V10data = Functions.createV10Data(df)
+V10_count = len(V10data.index)
 
 # PROBABILITY OF THE DATA OCCURRING GIVEN EACH GRADE
-ProbData_GivenV0 = ((V0data["Jugs_binned"].value_counts()[jugInput] / len(V0data.index))
-                    * (V0data["Footholds_binned"].value_counts()[footInput] / len(V0data.index)) 
-                    * (V0data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V0data.index))
-                    * (V0data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V0data.index)))
+ProbData_GivenV0 = ((V0data["Jugs_binned"].value_counts()[jugInput] / V0_count)
+                    * (V0data["Footholds_binned"].value_counts()[footInput] / V0_count)
+                    * (V0data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V0_count)
+                    * (V0data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V0_count))
 
-ProbData_GivenV1 = ((V1data["Jugs_binned"].value_counts()[jugInput] / len(V1data.index)) 
-                    * (V1data["Footholds_binned"].value_counts()[footInput] / len(V1data.index)) 
-                    * (V1data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V1data.index))
-                    * (V1data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V1data.index)))
+ProbData_GivenV1 = ((V1data["Jugs_binned"].value_counts()[jugInput] / V1_count)
+                    * (V1data["Footholds_binned"].value_counts()[footInput] / V1_count)
+                    * (V1data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V1_count)
+                    * (V1data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V1_count))
 
-ProbData_GivenV2 = ((V2data["Jugs_binned"].value_counts()[jugInput] / len(V2data.index)) 
-                    * (V2data["Footholds_binned"].value_counts()[footInput] / len(V2data.index)) 
-                    * (V2data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V2data.index))
-                    * (V2data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V2data.index)))
+ProbData_GivenV2 = ((V2data["Jugs_binned"].value_counts()[jugInput] / V2_count)
+                    * (V2data["Footholds_binned"].value_counts()[footInput] / V2_count)
+                    * (V2data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V2_count)
+                    * (V2data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V2_count))
 
-ProbData_GivenV3 = ((V3data["Jugs_binned"].value_counts()[jugInput] / len(V3data.index)) 
-                    * (V3data["Footholds_binned"].value_counts()[footInput] / len(V3data.index)) 
-                    * (V3data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V3data.index))
-                    * (V3data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V3data.index)))
+ProbData_GivenV3 = ((V3data["Jugs_binned"].value_counts()[jugInput] / V3_count)
+                    * (V3data["Footholds_binned"].value_counts()[footInput] / V3_count)
+                    * (V3data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V3_count)
+                    * (V3data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V3_count))
 
-ProbData_GivenV4 = ((V4data["Jugs_binned"].value_counts()[jugInput] / len(V4data.index)) 
-                    * (V4data["Footholds_binned"].value_counts()[footInput] / len(V4data.index)) 
-                    * (V4data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V4data.index))
-                    * (V4data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V4data.index)))
+ProbData_GivenV4 = ((V4data["Jugs_binned"].value_counts()[jugInput] / V4_count)
+                    * (V4data["Footholds_binned"].value_counts()[footInput] / V4_count)
+                    * (V4data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V4_count)
+                    * (V4data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V4_count))
 
-ProbData_GivenV7 = ((V7data["Jugs_binned"].value_counts()[jugInput] / len(V7data.index)) 
-                    * (V7data["Footholds_binned"].value_counts()[footInput] / len(V7data.index)) 
-                    * (V7data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V7data.index))
-                    * (V7data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V7data.index)))
+ProbData_GivenV7 = ((V7data["Jugs_binned"].value_counts()[jugInput] / V7_count)
+                    * (V7data["Footholds_binned"].value_counts()[footInput] / V7_count)
+                    * (V7data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V7_count)
+                    * (V7data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V7_count))
 
-ProbData_GivenV10 = ((V10data["Jugs_binned"].value_counts()[jugInput] / len(V10data.index)) 
-                    * (V10data["Footholds_binned"].value_counts()[footInput] / len(V10data.index)) 
-                    * (V10data["Total_Crimps_Binned"].value_counts()[crimpInput]/ len(V10data.index))
-                    * (V10data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ len(V10data.index)))
+ProbData_GivenV10 = ((V10data["Jugs_binned"].value_counts()[jugInput] / V10_count)
+                    * (V10data["Footholds_binned"].value_counts()[footInput] / V10_count)
+                    * (V10data["Total_Crimps_Binned"].value_counts()[crimpInput]/ V10_count)
+                    * (V10data["Extreme_Crimps_Binned"].value_counts()[extremecrimpInput]/ V10_count))
 
 # PROBABILITY OF EACH GRADE OCCURRING IN GENERAL
-total_row_count = len(mydata.index)
+total_row_count = len(df.index)
 Prob_V0 = V0data["Jugs_binned"].size / total_row_count
 Prob_V1 = V1data["Jugs_binned"].size / total_row_count
 Prob_V2 = V2data["Jugs_binned"].size / total_row_count
