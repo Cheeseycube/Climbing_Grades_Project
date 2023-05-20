@@ -5,7 +5,7 @@ import numpy as np
 
 def get_data():
     # IMPORTING AND CLEANING THE DATA
-    df = pd.read_excel("Climbing_Stats_ProjectVersion.xlsx")
+    df = pd.read_excel("Climbing_Stats_ProjectVersion.xlsx", "Sheet1")
     tempdata = df
     tempdata = tempdata.fillna(0)    
     mis_val = tempdata.isnull().sum() # this should be empty
@@ -13,10 +13,6 @@ def get_data():
     print(mis_val)
     df = tempdata
     return df
-
-def export_data(df):
-    df.to_excel("Climbing_Stats_ProjectVersion.xlsx")
-    print("EXPORTED DATA TO EXCEL")
 
 
 

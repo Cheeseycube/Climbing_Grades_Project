@@ -3,6 +3,7 @@ import pandas as pd
 import Climbing_Grade_Proj_Functions as Functions
 import PySimpleGUI as sg
 import sys
+from openpyxl import load_workbook
 
 if __name__ == "__main__":
     df = Functions.get_data()
@@ -29,7 +30,7 @@ if __name__ == "__main__":
         event, values = MainWindow.read()
         if (event == sg.WIN_CLOSED or event == 'Exit'):
             MainWindow.close()
-            break
+            sys.exit(0)
         if (event == 'Submit'):
             print("submitted")
             MainWindow.close()
@@ -55,30 +56,26 @@ if __name__ == "__main__":
         sg.popup('Invalid data, cancelled add')
         sys.exit(0)
 
+    workbook = load_workbook(filename="Climbing_Stats_ProjectVersion.xlsx")
+    sheet1 = workbook['Sheet1']
 
-    newRow = {
-                'Given Grade': [grade],
-                'Overall distance (ft)': [distance],
-                'Wall angle': [angle],
-                'Number of footholds': [footholds],
-                'Jugs': [jugs],
-                'Shallow Jugs': [shallow_jugs],
-                'Easy crimps': [easy_crimps],
-                'medium crimps': [medium_crimps],
-                'difficult crimps': [difficult_crimps],
-                'extreme crimps': [extreme_crimps],
-                'Underclings': [underclings],
-                'Slopers': [slopers]
-             }
+    total_crimps = easy_crimps + medium_crimps + difficult_crimps + extreme_crimps
+    total_jugs = jugs + shallow_jugs
+    total_handholds = total_jugs + total_crimps + slopers + underclings
 
-    new_df = pd.DataFrame(newRow)
+    new_row = (grade, angle, distance, footholds,
+               easy_crimps, medium_crimps, difficult_crimps, extreme_crimps,
+               jugs, shallow_jugs, slopers, underclings, total_crimps,
+               total_jugs, total_handholds, footholds)
 
+    sheet1.append(new_row)
     try:
-        df = pd.concat([df, new_df])
-        df.to_excel("Climbing_Stats_ProjectVersion.xlsx")
-        sg.popup('Successfully added the following new row:', newRow)
+        workbook.save("Climbing_Stats_ProjectVersion.xlsx")
+        sg.popup('Successfully added the following new row:', new_row)
     except:
-        sg.popup('Encountered an error when adding the new row:', newRow)
+        sg.popup('Encountered an error when adding the new row:', new_row)
+
+
 
 
 
